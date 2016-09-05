@@ -1,0 +1,14 @@
+
+# Build it using:
+# $ docker build UbuntuPrepared -t ubuntuprepared
+
+FROM ubuntu:16.04
+MAINTAINER remipassmoilesel
+LABEL name="UbuntuPrepared"
+
+# Update system
+RUN echo "Run APT update && installation ..." && echo
+RUN apt-get update \
+    && apt-get -y install apache2 postgresql wget \
+    && apt-get -y install git openssh-server xz-utils openssl \
+    && apt-get -y install tree vim # dev dependencies

@@ -20,7 +20,8 @@ echo
 echo "Launching container ..."
 echo
 
-CTR_ID=`docker run -d "$IMAGE_ID"`
+#CTR_ID=`docker run -d "$IMAGE_ID"`
+CTR_ID=`docker run -ti -d "$IMAGE_ID"`
 
 echo
 echo "Container ID: "

@@ -32,7 +32,7 @@ function setupCertifiedKeys {
 }
 
 # activate Apache2 needed modules
-a2enmod ssl rewrite
+a2enmod ssl rewrite proxy proxy_http headers
 
 # setup keys
 if [ $DJOE_USE_NON_CERTIF_KEYS = true ] ; then
@@ -41,9 +41,16 @@ else
   setupCertifiedKeys
 fi
 
-# configure Apache
+# remove uneeded configurations
 rm /etc/apache2/sites-available/*
-cp /opt/djoe-project/etc/apache2/sites-available/djoe-docker.conf /etc/apache2/sites-available/djoe-docker.conf
+rm /etc/apache2/sites-enabled/*
 
+# add new configuration file
+cp /opt/djoe-project/etc/apache2/sites-available/djoe-docker.conf /etc/apache2/sites-available/djoe-docker.conf
 a2ensite djoe-docker.conf
+
+# restart server
 service apache2 restart
+
+# link needed directories
+ln -s /opt/djoe-project/var/www/djoe/ /var/www/djoe
