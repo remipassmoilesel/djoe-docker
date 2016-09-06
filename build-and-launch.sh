@@ -1,8 +1,32 @@
 #!/bin/bash
 
 echo
-echo "Building Docker images..."
-echo "NOT READY FOR NOW !"
+echo "Build and launch can take long time, please be patient ...."
+echo
+
+sleep 3
+
+echo
+echo Used configuration:
+echo
+
+cat djoe-docker-config.sh
+
+echo
+echo TURN credentials:
+echo
+
+cat djoe-dependencies/turnCredentials.json
+
+
+echo
+echo "Building Docker images ..."
+echo
+echo "WORK IN PROGRESS, NOT READY FOR NOW"
+echo "WORK IN PROGRESS, NOT READY FOR NOW"
+echo "WORK IN PROGRESS, NOT READY FOR NOW"
+echo
+echo
 echo
 
 # Build base image with APT dependencies

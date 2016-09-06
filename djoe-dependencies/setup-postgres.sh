@@ -15,7 +15,12 @@ sudo service postgresql start
 
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres'; ";
 
-# Create needed databases
+# Setup Openfire database
 sudo -u postgres psql -c 'create database "openfire"'
+sudo -u postgres psql openfire < /opt/djoe-dependencies/openfire_config.sql
+
+# Setup Stats database
 sudo -u postgres psql -c 'create database "Stats"'
+
+
 

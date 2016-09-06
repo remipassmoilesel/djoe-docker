@@ -60,7 +60,7 @@ RUN cd /etc/apache2 && tree -L 2
 RUN cp /opt/djoe-dependencies/docker-entrypoint.sh /opt/docker-entrypoint.sh && sync && chmod +x /opt/docker-entrypoint.sh
 ENTRYPOINT /opt/docker-entrypoint.sh
 
-EXPOSE 80 443
+EXPOSE 80 443 3000 3005 7070 9001 9090 9091
 
 
 
