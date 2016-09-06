@@ -40,7 +40,7 @@ if [ $? != 0 ]; then
 fi
 
 # Build final image
-IMAGE_ID="docker-djoe"
+IMAGE_ID="heydjoe"
 
 docker build -t "$IMAGE_ID" .
 
@@ -57,13 +57,17 @@ echo
 #CTR_ID=`docker run -d "$IMAGE_ID"`
 CTR_ID=`docker run -ti -d "$IMAGE_ID"`
 
+sleep 3
+
 echo
 echo "Container ID: "
 echo "$CTR_ID"
 
-sleep 1
+echo
+echo "Container launching completed. Container listenning adress: "
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$CTR_ID"
 
 echo
-echo "Informations on container: "
-docker inspect "$CTR_ID"
+echo "To get more informations, try: docker inspect $CTR_ID"
+
 
