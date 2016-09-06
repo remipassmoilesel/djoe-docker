@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Download optionally dependencies and extract them in /opt directory
+# Download optionally dependencies and extract them in final image
 # See config.sh
 #
 
@@ -20,6 +20,15 @@ function downloadDependencies {
 
   # Node JS
   wget https://nodejs.org/dist/v4.4.7/node-v4.4.7-linux-x64.tar.xz -O nodejs4.tar.gz
+
+  # Etherpad
+  git clone https://github.com/ether/etherpad-lite/ /opt/etherpad-lite
+
+  # Stat module
+  git clone https://github.com/remipassmoilesel/web-stats /opt/web-stats
+
+  # Djoe
+  git clone https://github.com/remipassmoilesel/djoe /opt/djoe-project/
 
 }
 

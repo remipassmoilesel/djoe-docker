@@ -1,31 +1,20 @@
 
-FROM ubuntuprepared:latest
+# $ docker build . -t heydjoe
 
-#FROM ubuntu:16.04
-#MAINTAINER remipassmoilesel
-#LABEL name="Hey Djoe !" description="All you need for instant messaging :)"
-#
+FROM djoe_ubuntu_prepared:latest
+MAINTAINER remipassmoilesel
+LABEL name="Hey Djoe !" description="All you need for instant messaging :)"
 
-#
-## Only for debug purposes
-#ADD djoe-project/ /opt/djoe-project/
-#
-## Display configuration
-#RUN /bin/bash -x /opt/djoe-docker-config.sh
-#
-## Update system
-#RUN echo "Run APT update && installation ..." && echo
-#RUN apt-get update \
-#    && apt-get -y install apache2 postgresql wget \
-#    && apt-get -y install git openssh-server xz-utils openssl \
-#    && apt-get -y install tree # dev dependencies
-
-# Add configuration file to system
+# Add configuration files
 ADD djoe-docker-config.sh /opt/djoe-docker-config.sh
+RUN chmod +x /opt/djoe-docker-config.sh
+
 ADD djoe-dependencies/ /opt/djoe-dependencies/
 
-# Only for debug purposes, normally project have to be clone with GIT in setup-djoe.conf
-ADD djoe-project/ /opt/djoe-project/
+# Only for debug purposes, to avoid too many downloads
+ADD djoe-dependencies/djoe-project/ /opt/djoe-project/
+ADD djoe-dependencies/etherpad-lite/ /opt/etherpad-lite/
+ADD djoe-dependencies/web-stats/ /opt/web-stats/
 
 # Download dependencies only if necessary (see config.sh)
 # and extract them
@@ -43,18 +32,31 @@ RUN echo "Download and setup Djoe ..." && echo
 RUN cd /opt/djoe-dependencies \
     && chmod +x setup-djoe.sh && sync && ./setup-djoe.sh
 
-# Show tree
-RUN cd /opt && tree -L 3
-
 # Configure Apache
 RUN cd /opt/djoe-dependencies \
     && chmod +x setup-apache.sh && sync && ./setup-apache.sh
 
+# Configure Postgres
+RUN cd /opt/djoe-dependencies \
+    && chmod +x setup-postgres.sh && sync && ./setup-postgres.sh
+
+# Configure Openfire
+RUN cd /opt/djoe-dependencies \
+    && chmod +x setup-openfire.sh && sync && ./setup-openfire.sh
+
+# Configure Stats module
+RUN cd /opt/djoe-dependencies \
+    && chmod +x setup-webstats.sh && sync && ./setup-webstats.sh
+
+# Show trees, for debug purposes
+RUN cd /opt && tree -L 3
+RUN cd /etc/apache2 && tree -L 2
+
+# Configure docker entrypoint
+RUN cp /opt/djoe-dependencies/docker-entrypoint.sh /opt/docker-entrypoint.sh && sync && chmod +x /opt/docker-entrypoint.sh
 ENTRYPOINT /opt/docker-entrypoint.sh
 
 EXPOSE 80 443
-
-
 
 #
 ## installer node et etherpad

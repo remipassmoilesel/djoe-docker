@@ -1,11 +1,21 @@
 #!/bin/bash
 
 echo
-echo "Building Docker container..."
+echo "Building Docker images..."
 echo "NOT READY FOR NOW !"
 echo
 
-# The future image id
+# Build base image with APT dependencies
+
+docker build -t "djoe_ubuntu_prepared" base-image
+
+if [ $? != 0 ]; then
+  echo
+  echo "Error while building Docker image"
+  exit 1
+fi
+
+# Build final image
 IMAGE_ID="docker-djoe"
 
 docker build -t "$IMAGE_ID" .
