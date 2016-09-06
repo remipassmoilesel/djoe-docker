@@ -34,6 +34,25 @@ DJOE_SSL_CERT="djoe.crt"
 #DJOE_DEBUG_MODE=false
 DJOE_DEBUG_MODE=true
 
-# If set to true, dependencies will be downloaded
-#DJOE_DOWNLOAD_DEPENDENCIES=true
-DJOE_DOWNLOAD_DEPENDENCIES=false
+# If set to false, some dependencies will not be downloaded. This is usefull only for debug purposes.
+# If download is turned off, you have to place dependencies in djoe-dendencies folder like that:
+#    .
+#    ├── djoe-dependencies
+#    │   ├── djoe-project           // djoe repository cloned with Git
+#    │   ├── etherpad-lite          // etherpad-lite repository cloned with Git
+#    │   ├── web-stats              // web-stats repository cloned with Git
+#    │   ├── nodejs4.tar.gz
+#    │   ├── openfire.tar.gz
+#    │   └── ...
+#    └── ...
+# And uncomment some lines in Dockerfile:
+#   Only for debug purposes, to avoid too many downloads
+#   ADD djoe-dependencies/djoe-project/ /opt/djoe-project/
+#   ADD djoe-dependencies/etherpad-lite/ /opt/etherpad-lite/
+#   ADD djoe-dependencies/web-stats/ /opt/web-stats/
+#
+# Even if download is turned off, some dependencies have to be downloaded.
+#
+
+DJOE_DOWNLOAD_DEPENDENCIES=true
+#DJOE_DOWNLOAD_DEPENDENCIES=false

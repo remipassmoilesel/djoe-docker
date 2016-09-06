@@ -12,9 +12,9 @@ RUN chmod +x /opt/djoe-docker-config.sh
 ADD djoe-dependencies/ /opt/djoe-dependencies/
 
 # Only for debug purposes, to avoid too many downloads
-ADD djoe-dependencies/djoe-project/ /opt/djoe-project/
-ADD djoe-dependencies/etherpad-lite/ /opt/etherpad-lite/
-ADD djoe-dependencies/web-stats/ /opt/web-stats/
+# ADD djoe-dependencies/djoe-project/ /opt/djoe-project/
+# ADD djoe-dependencies/etherpad-lite/ /opt/etherpad-lite/
+# ADD djoe-dependencies/web-stats/ /opt/web-stats/
 
 # Download dependencies only if necessary (see config.sh)
 # and extract them

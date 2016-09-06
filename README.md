@@ -1,6 +1,6 @@
-# Docker image to test Hey Djoe ! 
+# Docker image for *Hey Djoe !* 
 
-Main repository: (https://github.com/remipassmoilesel/djoe)
+Main repository: https://github.com/remipassmoilesel/djoe
 
 ## Why Docker ?
 
