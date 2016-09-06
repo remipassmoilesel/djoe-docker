@@ -52,10 +52,6 @@ RUN cd /opt/djoe-dependencies \
 RUN cd /opt/djoe-dependencies \
     && chmod +x setup-webstats.sh && sync && ./setup-webstats.sh
 
-# Show trees, for debug purposes
-RUN cd /opt && tree -L 3
-RUN cd /etc/apache2 && tree -L 2
-
 # Configure docker entrypoint
 RUN cp /opt/djoe-dependencies/docker-entrypoint.sh /opt/docker-entrypoint.sh && sync && chmod +x /opt/docker-entrypoint.sh
 ENTRYPOINT /opt/docker-entrypoint.sh
