@@ -49,8 +49,5 @@ rm /etc/apache2/sites-enabled/*
 cp /opt/djoe-project/etc/apache2/sites-available/djoe-docker.conf /etc/apache2/sites-available/djoe-docker.conf
 a2ensite djoe-docker.conf
 
-# restart server
-service apache2 restart
-
 # link needed directories
 ln -s /opt/djoe-project/var/www/djoe/ /var/www/djoe
