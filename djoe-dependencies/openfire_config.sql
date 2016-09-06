@@ -848,7 +848,6 @@ register.inband	false
 register.password	false
 plugin.restapi.enabled	true
 plugin.restapi.httpAuth	secret
-plugin.restapi.allowedIPs	null
 plugin.restapi.customAuthFilter	null
 update.lastCheck	1473166952019
 xmpp.httpbind.scriptSyntax.enabled	true
