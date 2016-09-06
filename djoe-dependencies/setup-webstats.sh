@@ -8,6 +8,8 @@ if [ $DJOE_DEBUG_MODE = true ] ; then
   set -x
 fi
 
+export PATH=$PATH:/opt/nodejs4/bin/
+
 cd /opt/web-stats
 
 npm install
