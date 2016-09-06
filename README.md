@@ -1,19 +1,38 @@
-# Dockerfile in progress
+# Docker image to test Hey Djoe ! 
 
-Not working for now.
+Main repository: (https://github.com/remipassmoilesel/djoe)
 
 ## Why Docker ?
 
 Docker allow you to install and run the entire project with a few commands:
 
 ```
-    $ docker build docker/ -t heydjoe
-    $ docker run -ti heydjoe 
+
+    # /!\ Need Docker, see https://docs.docker.com/engine/installation/
     
-    # or 
-    
+    $ git clone https://github.com/remipassmoilesel/djoe-docker
+    $ cd djoe-docker
     $ ./build-and-launch.sh
-     
+
 ```
 
-Configuration available in `djoe-docker-config.sh`
+This produce an *example* installation with:
+
+* Apache HTTP with a simple TLS configuration
+* XMPP server
+* Etherpad 
+* Postgres database
+* Statistics server
+
+Tested only on Ubuntu 16.04 LTS
+
+## Before launch
+
+You have to adapt configuration by editing `djoe-docker-config.sh`
+
+## Multimedia in real world
+
+If you want to test videoconference in *real world* you will have to use a TURN server, not provided here. 
+
+TURN server credentials can be inserted in `djoe-dependencies/turnCrednetials.json`
+

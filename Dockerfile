@@ -40,6 +40,10 @@ RUN cd /opt/djoe-dependencies \
 RUN cd /opt/djoe-dependencies \
     && chmod +x setup-postgres.sh && sync && ./setup-postgres.sh
 
+# Configure Etherpad
+RUN cd /opt/djoe-dependencies \
+    && chmod +x setup-etherpad.sh && sync && ./setup-etherpad.sh
+
 # Configure Openfire
 RUN cd /opt/djoe-dependencies \
     && chmod +x setup-openfire.sh && sync && ./setup-openfire.sh
@@ -57,26 +61,6 @@ RUN cp /opt/djoe-dependencies/docker-entrypoint.sh /opt/docker-entrypoint.sh && 
 ENTRYPOINT /opt/docker-entrypoint.sh
 
 EXPOSE 80 443
-
-#
-## installer node et etherpad
-#RUN cd opt/ \
-#    && git clone https://github.com/ether/etherpad-lite/ \
-#    && wget https://nodejs.org/dist/v4.4.4/node-v4.4.4-linux-x64.tar.xz \
-#    && tar -xf node-v4.4.4-linux-x64.tar.xz \
-#    && mv node-v4.4.4-linux-x64 node
-#
-#ADD opt.etherpad.settings.json /opt/etherpad/settings.json
-#
-## fichier de lancement des serveurs
-#ADD opt.docker-entrypoint.sh /opt/docker-entrypoint.sh
-#RUN chmod +x /opt/docker-entrypoint.sh
-#
-## Le script lancé au démarrage du conteneur
-
-#
-## ouvrir les ports nécéssaires
-#EXPOSE 80 7070 9090 9091 9001
 
 
 
