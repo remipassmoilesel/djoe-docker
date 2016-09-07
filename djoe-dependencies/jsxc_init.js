@@ -55,7 +55,7 @@ $(function() {
     },
 
     favicon : {
-      enable : false,
+      enable : false
     },
 
     // xmpp options
@@ -73,7 +73,7 @@ $(function() {
     },
 
     // if lot of 404 errors precise jsxc root
-    root : 'jsxc/dev',
+    root : 'jsxc/build',
 
     // stat module. save and monitor events
     stats : {
