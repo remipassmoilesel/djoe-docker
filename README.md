@@ -28,7 +28,18 @@ Tested only on Ubuntu 16.04 LTS
 
 ## Before launch
 
-You have to adapt configuration by editing `djoe-docker-config.sh`
+First you have to adapt configuration by editing `djoe-docker-config.sh`
+
+Then you have to set up a network. A good solution is to set a local network, and to patch `/etc/hosts` of each computer like that:
+ 
+```
+
+    # As root, with the right IP adress of the Docker host computer
+    # echo "192.168.1.36     www.heydjoe.domain" >> /etc/hosts
+    
+```
+
+After that you can visit `www.heydjoe.domain` with your favorite browser.
 
 ## Multimedia in real world
 

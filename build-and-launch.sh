@@ -54,8 +54,7 @@ echo
 echo "Launching container ..."
 echo
 
-#CTR_ID=`docker run -d "$IMAGE_ID"`
-CTR_ID=`docker run -ti -d "$IMAGE_ID"`
+CTR_ID=`docker run -d -p 80:80 -p 443:443 "$IMAGE_ID"`
 
 sleep 3
 

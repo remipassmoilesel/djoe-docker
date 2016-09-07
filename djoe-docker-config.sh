@@ -9,11 +9,11 @@
 # modify djoe-dependencies/turnCredentials.json and add your credentials
 #
 
-# XMPP domain, a name representing an XMPP ~~"network"
+# XMPP domain, a name representing an XMPP ~"network"~
 DJOE_XMPP_DOMAIN="im.silverpeas.net"
 
 # HTTP domain, where whole installation can be reached
-DJOE_HTTP_DOMAIN="172.17.0.2"
+DJOE_HTTP_DOMAIN="www.heydjoe.domain"
 
 # If set to true, non certified TLS keys will be created, and behavior of demo website will
 # be adapted. Otherwise you will have to specify where are keys
