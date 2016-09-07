@@ -36,3 +36,7 @@ If you want to test videoconference in *real world* you will have to use a TURN 
 
 TURN server credentials can be inserted in `djoe-dependencies/turnCrednetials.json`
 
+## Why put an Apache proxy in Dockerfile ?
+
+Unfortunately, some functionnalities are disabled if XMPP client is loaded in a non secure environment.
+In order to allow to test client full-featured, the Apache proxy is compulsory.

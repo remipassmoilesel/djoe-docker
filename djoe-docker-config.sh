@@ -22,11 +22,7 @@ DJOE_USE_NON_CERTIF_KEYS=true
 
 # Path of TLS keys, relative to the main Dockerfile directory ($DJOE_GIT_ROOT/opt/docker-djoe/)
 # If option DJOE_USE_NON_CERTIF_KEYS is enabled, these paths will not be used
-
-# NOT EFFECTIVE FOR NOW
-# NOT EFFECTIVE FOR NOW
-# NOT EFFECTIVE FOR NOW
-
+# Not tested for now
 DJOE_SSL_KEY="djoe.key"
 DJOE_SSL_CERT="djoe.crt"
 
@@ -50,6 +46,8 @@ DJOE_DEBUG_MODE=true
 #   ADD djoe-dependencies/djoe-project/ /opt/djoe-project/
 #   ADD djoe-dependencies/etherpad-lite/ /opt/etherpad-lite/
 #   ADD djoe-dependencies/web-stats/ /opt/web-stats/
+#
+# Think to disable .Dockerignore too
 #
 # Even if download is turned off, some dependencies have to be downloaded.
 #

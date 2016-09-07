@@ -10,9 +10,13 @@ fi
 
 export PATH=$PATH:/opt/nodejs4/bin/
 
+# Install dependencies
 cd /opt/web-stats
 
 npm install
 
 cd public
+
 bower install --allow-root
+
+

@@ -23,6 +23,10 @@ RUN echo "Download and extract dependencies ..." && echo
 RUN cd /opt/djoe-dependencies \
     && chmod +x get-dependencies.sh && sync && ./get-dependencies.sh
 
+# Configure Postgres
+RUN cd /opt/djoe-dependencies \
+    && chmod +x setup-postgres.sh && sync && ./setup-postgres.sh
+
 # Setup NodeJS
 RUN cd /opt/djoe-dependencies \
     && chmod +x setup-node.sh && sync && ./setup-node.sh
@@ -35,10 +39,6 @@ RUN cd /opt/djoe-dependencies \
 # Configure Apache
 RUN cd /opt/djoe-dependencies \
     && chmod +x setup-apache.sh && sync && ./setup-apache.sh
-
-# Configure Postgres
-RUN cd /opt/djoe-dependencies \
-    && chmod +x setup-postgres.sh && sync && ./setup-postgres.sh
 
 # Configure Etherpad
 RUN cd /opt/djoe-dependencies \

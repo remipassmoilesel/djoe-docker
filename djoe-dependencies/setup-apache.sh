@@ -13,7 +13,12 @@ fi
 
 function setupNonCertifiedKeys {
 
-  # Generate keys
+  echo
+  echo "Generate self-signed TLS keys"
+  echo "Generate self-signed TLS keys"
+  echo "Generate self-signed TLS keys"
+  echo
+
   cd /etc/ssl
   openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 \
     -subj "/C=AA/ST=BB/L=CC/O=DD/CN=EE" \
@@ -22,13 +27,27 @@ function setupNonCertifiedKeys {
 }
 
 function setupCertifiedKeys {
-  echo "Setup with certified keys not implemented for now"
+
+  echo
+  echo "Setup provided TLS keys"
+  echo "Setup provided TLS keys"
+  echo "Setup provided TLS keys"
+  echo
+
+  if [ ! -f "$DJOE_SSL_KEY" ]; then
+      echo "Unable to find key: $DJOE_SSL_KEY";
+      exit 1
+  fi
+
+  if [ ! -f "$DJOE_SSL_CERT" ]; then
+      echo "Unable to find certificate: $DJOE_SSL_CERT";
+      exit 1
+  fi
 
   # Copy keys to /etc/ssl
-  # DJOE_SSL_KEY="djoe.key"
-  # DJOE_SSL_CERT="djoe.crt"
+  cp "$DJOE_SSL_KEY" /etc/ssl/djoe.key
+  cp "$DJOE_SSL_CERT" /etc/ssl/djoe.crt
 
-  exit 1
 }
 
 # activate Apache2 needed modules
