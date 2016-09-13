@@ -28,7 +28,7 @@ function downloadDependencies {
   git clone https://github.com/remipassmoilesel/web-stats /opt/web-stats
 
   # Djoe
-  git clone https://github.com/remipassmoilesel/djoe /opt/djoe-project/
+  git clone https://github.com/remipassmoilesel/heydjoe /opt/djoe-project/
 
 }
 
