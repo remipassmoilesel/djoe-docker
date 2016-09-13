@@ -22,3 +22,5 @@ sudo -u postgres psql openfire < /opt/djoe-dependencies/openfire_config.sql
 # Setup Stats database
 sudo -u postgres psql -c 'create database "Stats"'
 
+# Setup Etherpad database
+sudo -u postgres psql -c 'create database "etherpad"'
