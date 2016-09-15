@@ -10,7 +10,7 @@
 #
 
 # XMPP domain, a name representing an XMPP ~"network"~
-DJOE_XMPP_DOMAIN="im.silverpeas.net"
+DJOE_XMPP_DOMAIN="heydjoe.xmpp"
 
 # HTTP domain, where whole installation can be reached
 DJOE_HTTP_DOMAIN="www.heydjoe.domain"

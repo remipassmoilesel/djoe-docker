@@ -85,7 +85,7 @@ $(function() {
 
     // RTCPeerConfiguration used for audio/video calls.
     RTCPeerConfig : {
-      url : 'https://im.silverpeas.net/turnCredentials.json'
+      url : 'https://{{%%HTTP-DOMAIN%%}}/turnCredentials.json'
     }
 
   };
