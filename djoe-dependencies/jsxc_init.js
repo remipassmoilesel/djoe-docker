@@ -12,8 +12,11 @@ $(function() {
 
   jsxc.debug("Initializing instant messaging");
 
+  var httpDomain = "{{%%HTTP-DOMAIN%%}}";
+  var xmppDomain = "{{%%XMPP-DOMAIN%%}}";
+
   // etherpad resource
-  var etherpadRes = "https://{{%%HTTP-DOMAIN%%}}/etherpad/";
+  var etherpadRes = "https://" + httpDomain + "/etherpad/";
 
   // clientName
   var xmppResource = "heyDjoe";
@@ -27,7 +30,6 @@ $(function() {
   /**
    *   Initialization options for JSXC
    */
-
   var options = {
 
     // in french
@@ -38,7 +40,7 @@ $(function() {
     // REST support
     rest : {
       apiName : "openfire",
-      apiBaseUrl : "https://{{%%HTTP-DOMAIN%%}}/openfire-rest",
+      apiBaseUrl : "https://" + httpDomain + "/openfire-rest",
       apiKey : "ztR2yJWNRu9ffPIw"
     },
 
@@ -51,20 +53,20 @@ $(function() {
 
     // MUST specify muc server to avoid errors
     muc : {
-      server : "conference.{{%%XMPP-DOMAIN%%}}"
+      server : "conference." + xmppDomain
     },
 
     favicon : {
-      enable : false
+      enable : false,
     },
 
     // xmpp options
     xmpp : {
-      url : "https://{{%%HTTP-DOMAIN%%}}/http-bind/",
-      domain : "{{%%XMPP-DOMAIN%%}}",
+      url : "https://" + httpDomain + "/http-bind/",
+      domain : xmppDomain,
       resource : xmppResource,
       overwrite : true,
-      searchDomain : "search.{{%%XMPP-DOMAIN%%}}",
+      searchDomain : "search." + xmppDomain
     },
 
     // disable otr because of display disturbing
@@ -73,19 +75,21 @@ $(function() {
     },
 
     // if lot of 404 errors precise jsxc root
-    root : 'jsxc/build',
+    root : 'jsxc/dev',
 
     // stat module. save and monitor events
     stats : {
       enabled : true,
-      destinationUrl : "https://{{%%HTTP-DOMAIN%%}}/stats",
+      destinationUrl : "https://" + httpDomain + "/stats",
       autosend : true,
       authorization : "DK5I4-0yl9N2KN64Pg5YcEAsdnCXeamr"
     },
 
     // RTCPeerConfiguration used for audio/video calls.
     RTCPeerConfig : {
-      url : 'https://{{%%HTTP-DOMAIN%%}}/turnCredentials.json'
+
+      url : 'https://' + httpDomain + '/turnCredentials.json'
+
     }
 
   };
@@ -94,4 +98,3 @@ $(function() {
   jsxc.init(options);
 
 });
-
