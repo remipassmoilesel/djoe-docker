@@ -22,7 +22,7 @@ DJOE_USE_NON_CERTIF_KEYS=true
 
 # Path of TLS keys, relative to the main Dockerfile directory ($DJOE_GIT_ROOT/opt/docker-djoe/)
 # If option DJOE_USE_NON_CERTIF_KEYS is enabled, these paths will not be used
-# Not tested for now
+# Keys have to be placed in 'djoe-dependencies' folder
 DJOE_SSL_KEY="djoe.key"
 DJOE_SSL_CERT="djoe.crt"
 

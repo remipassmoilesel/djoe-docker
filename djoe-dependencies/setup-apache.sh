@@ -45,8 +45,8 @@ function setupCertifiedKeys {
   fi
 
   # Copy keys to /etc/ssl
-  cp "$DJOE_SSL_KEY" /etc/ssl/djoe.key
-  cp "$DJOE_SSL_CERT" /etc/ssl/djoe.crt
+  cp "/opt/djoe-dependencies/$DJOE_SSL_KEY" /etc/ssl/djoe.key
+  cp "/opt/djoe-dependencies/$DJOE_SSL_CERT" /etc/ssl/djoe.crt
 
 }
 
