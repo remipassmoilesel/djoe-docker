@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export PATH=$PATH:/opt/nodejs4/bin/
+
 echo
 echo
 echo Launch can take long time, please be patient ....
@@ -24,8 +26,11 @@ echo
 
 cat /opt/djoe-dependencies/turnCredentials.json
 
+echo
+echo Starting OpenSSH
+echo
 
-export PATH=$PATH:/opt/nodejs4/bin/
+sudo service ssh start
 
 echo
 echo Starting PostgreSQL

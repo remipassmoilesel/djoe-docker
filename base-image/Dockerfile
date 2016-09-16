@@ -11,5 +11,8 @@ LABEL name="djoe_ubuntu_prepared"
 RUN echo "Run APT update && installation ..." && echo
 RUN apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y \
     && apt-get -y install apache2 curl openjdk-8-jre-headless sudo postgresql wget \
-    && apt-get -y install git openssh-server xz-utils openssl
-#    && apt-get -y install tree vim ranger # dev dependencies
+    && apt-get -y install git openssh-server xz-utils openssl \
+    && apt-get -y install tree vim-nox ranger net-tools # dev dependencies
+
+RUN useradd --create-home -G sudo --shell /bin/bash admin \
+    && echo "admin:admin" | chpasswd
