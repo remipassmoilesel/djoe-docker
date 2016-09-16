@@ -12,9 +12,9 @@ RUN chmod +x /opt/djoe-docker-config.sh
 ADD djoe-dependencies/ /opt/djoe-dependencies/
 
 # Only for debug purposes, to avoid too many downloads
-# ADD djoe-dependencies/djoe-project/ /opt/djoe-project/
-# ADD djoe-dependencies/etherpad-lite/ /opt/etherpad-lite/
-# ADD djoe-dependencies/web-stats/ /opt/web-stats/
+#ADD djoe-dependencies/djoe-project/ /opt/djoe-project/
+#ADD djoe-dependencies/etherpad-lite/ /opt/etherpad-lite/
+#ADD djoe-dependencies/web-stats/ /opt/web-stats/
 
 # Download dependencies only if necessary (see config.sh)
 # and extract them
@@ -58,7 +58,7 @@ ENTRYPOINT /opt/docker-entrypoint.sh
 
 # Normally just 80 and 443 may be sufficient, but it can be usefull to expose other ports
 # if you want to bypass the Apache 2 proxy for optionnal components (stats, etherpad, ...)
-EXPOSE 80 443 3000 3005 7070 9001 9090 9091
+EXPOSE 22 80 443 3000 3005 7070 9001 9090 9091
 
 
 

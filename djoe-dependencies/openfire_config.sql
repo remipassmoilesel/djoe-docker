@@ -787,7 +787,7 @@ COPY ofprivate (username, name, namespace, privatedata) FROM stdin;
 COPY ofproperty (name, propvalue) FROM stdin;
 passwordKey	2szOuB94Rri7LRc
 provider.admin.className	org.jivesoftware.openfire.admin.DefaultAdminProvider
-xmpp.domain	heydjoe.xmpp
+xmpp.domain	{{%%XMPP-DOMAIN%%}}
 provider.auth.className	org.jivesoftware.openfire.auth.DefaultAuthProvider
 provider.lockout.className	org.jivesoftware.openfire.lockout.DefaultLockOutProvider
 provider.group.className	org.jivesoftware.openfire.group.DefaultGroupProvider

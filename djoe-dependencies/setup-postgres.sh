@@ -16,6 +16,8 @@ sudo service postgresql start
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres'; ";
 
 # Setup Openfire configuration database
+sed -i "s/{{%%HTTP-DOMAIN%%}}/$DJOE_HTTP_DOMAIN/g" /opt/djoe-dependencies/openfire_config.sql
+sed -i "s/{{%%XMPP-DOMAIN%%}}/$DJOE_XMPP_DOMAIN/g" /opt/djoe-dependencies/openfire_config.sql
 sudo -u postgres psql -c 'create database "openfire"'
 sudo -u postgres psql openfire < /opt/djoe-dependencies/openfire_config.sql
 
