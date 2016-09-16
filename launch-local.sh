@@ -22,7 +22,7 @@ cat djoe-dependencies/turnCredentials.json
 IMAGE_ID="heydjoe"
 
 #EXPOSE 22 80 3000 3005 7070 9001 9090 9091
-CTR_ID=`docker run -d -p 22:22 -p 80:80 -p 3000:3000 -p 7070:7070 -p 9001:9001 -p 9090:9090 "$IMAGE_ID"`
+CTR_ID=`docker run -d -p 127.0.0.1:20022:22 -p 127.0.0.1:20080:80 -p 127.0.0.1:23000:3000 -p 127.0.0.1:27070:7070 -p 127.0.0.1:29001:9001 -p 127.0.0.1:29090:9090 "$IMAGE_ID"`
 
 sleep 3
 
