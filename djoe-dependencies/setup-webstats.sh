@@ -20,6 +20,6 @@ cd public
 bower install --allow-root
 
 # modify stats configuration
-sed -i "s/{{%%HTTP-DOMAIN%%}}/$DJOE_HTTP_DOMAIN/g" /opt/djoe-dependencies/webstats_config.js
-sed -i "s/{{%%XMPP-DOMAIN%%}}/$DJOE_XMPP_DOMAIN/g" /opt/djoe-dependencies/webstats_config.js
 cp /opt/djoe-dependencies/webstats_config.js /opt/web-stats/configuration.js
+sed -i "s/{{%%HTTP-DOMAIN%%}}/$DJOE_HTTP_DOMAIN/g" /opt/web-stats/configuration.js
+sed -i "s/{{%%XMPP-DOMAIN%%}}/$DJOE_XMPP_DOMAIN/g" /opt/web-stats/configuration.js

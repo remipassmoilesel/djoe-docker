@@ -46,12 +46,7 @@ module.exports = (function() {
      */
     DESTINATION_URL : "https://{{%%HTTP-DOMAIN%%}}/stats"
   };
-
-  if (DEV_MODE === true) {
-    configuration.PORT = 3005;
-    configuration.DESTINATION_URL = "http://127.0.0.1:3005";
-  }
-
+  
   return configuration;
 
 })();
