@@ -56,9 +56,7 @@ RUN cd /opt/djoe-dependencies \
 RUN cp /opt/djoe-dependencies/docker-entrypoint.sh /opt/docker-entrypoint.sh && sync && chmod +x /opt/docker-entrypoint.sh
 ENTRYPOINT /opt/docker-entrypoint.sh
 
-# Normally just 80 and 443 may be sufficient, but it can be usefull to expose other ports
-# if you want to bypass the Apache 2 proxy for optionnal components (stats, etherpad, ...)
-EXPOSE 22 80 443 3000 3005 7070 9001 9090 9091
+EXPOSE 22 80 3000 3005 7070 9001 9090 9091
 
 
 

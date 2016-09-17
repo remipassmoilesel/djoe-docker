@@ -11,61 +11,13 @@ if [ $DJOE_DEBUG_MODE = true ] ; then
   set -x
 fi
 
-function setupNonCertifiedKeys {
-
-  echo
-  echo "Generate self-signed TLS keys"
-  echo "Generate self-signed TLS keys"
-  echo "Generate self-signed TLS keys"
-  echo
-
-  cd /etc/ssl
-  openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 \
-    -subj "/C=AA/ST=BB/L=CC/O=DD/CN=EE" \
-    -keyout djoe.key -out djoe.crt
-
-}
-
-function setupCertifiedKeys {
-
-  echo
-  echo "Setup provided TLS keys"
-  echo "Setup provided TLS keys"
-  echo "Setup provided TLS keys"
-  echo
-
-  if [ ! -f "$DJOE_SSL_KEY" ]; then
-      echo "Unable to find key: $DJOE_SSL_KEY";
-      exit 1
-  fi
-
-  if [ ! -f "$DJOE_SSL_CERT" ]; then
-      echo "Unable to find certificate: $DJOE_SSL_CERT";
-      exit 1
-  fi
-
-  # Copy keys to /etc/ssl
-  cp "/opt/djoe-dependencies/$DJOE_SSL_KEY" /etc/ssl/djoe.key
-  cp "/opt/djoe-dependencies/$DJOE_SSL_CERT" /etc/ssl/djoe.crt
-
-}
-
-# activate Apache2 needed modules
-a2enmod ssl rewrite proxy proxy_http headers
-
-# setup keys
-if [ $DJOE_USE_NON_CERTIF_KEYS = true ] ; then
-  setupNonCertifiedKeys
-else
-  setupCertifiedKeys
-fi
-
 # remove uneeded configurations
 rm /etc/apache2/sites-available/*
 rm /etc/apache2/sites-enabled/*
 
 # add new configuration file
-cp /opt/djoe-project/etc/apache2/sites-available/djoe-docker.conf /etc/apache2/sites-available/djoe-docker.conf
+cp /opt/djoe-dependencies/apache-virtualhost.conf /etc/apache2/sites-available/djoe-docker.conf
+
 a2ensite djoe-docker.conf
 
 # link needed directories
