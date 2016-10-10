@@ -13,11 +13,11 @@
 DJOE_XMPP_DOMAIN="heydjoe.xmpp"
 
 # HTTP domain, where whole installation can be reached
-DJOE_HTTP_DOMAIN="www.heydjoe.domain"
+DJOE_HTTP_DOMAIN="hey-djoe.fr"
 
 # If set to true, verbosity will be increased
-#DJOE_DEBUG_MODE=false
-DJOE_DEBUG_MODE=true
+DJOE_DEBUG_MODE=false
+#DJOE_DEBUG_MODE=true
 
 # If set to false, some dependencies will not be downloaded. This is usefull only for debug purposes.
 # If download is turned off, you have to place dependencies in djoe-dendencies folder like that:
