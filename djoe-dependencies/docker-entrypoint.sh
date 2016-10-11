@@ -30,18 +30,20 @@ echo
 echo Starting OpenSSH
 echo
 
-sudo service ssh start
+service ssh start
 
 echo
 echo Starting PostgreSQL
 echo
 
-sudo service postgresql start
+service postgresql start
 
 echo
 echo Starting Openfire
 echo
 
+# always stop before, sometimes Openfire can have trouble
+/opt/openfire/bin/openfire stop
 /opt/openfire/bin/openfire start
 
 echo
