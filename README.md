@@ -1,6 +1,9 @@
 # Docker image for *Hey Djoe !* 
 
-Main repository: https://github.com/remipassmoilesel/djoe
+## Presentation
+
+A small video is available on Youtube: https://youtu.be/AhwIXTTs5ao
+Main repository: https://github.com/remipassmoilesel/heydjoe
 
 ## Why Docker ?
 
