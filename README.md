@@ -12,7 +12,8 @@ Docker allow you to install and run the entire project with a few commands:
     
     $ git clone https://github.com/remipassmoilesel/djoe-docker
     $ cd djoe-docker
-    $ ./build-and-launch.sh
+    $ ./build-image.sh
+    $ ./launch-new-container.sh
 
 ```
 

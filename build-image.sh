@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo
-echo "Build and launch can take long time, please be patient ...."
+echo "Build can take long time, please be patient ...."
 echo
 
 sleep 3
@@ -49,24 +49,5 @@ if [ $? != 0 ]; then
   echo "Error while building Docker image"
   exit 1
 fi
-
-echo 
-echo "Launching container ..."
-echo
-
-CTR_ID=`docker run -d -p 22:22 -p 80:80 -p 3000:3000 -p 7070:7070 -p 9001:9001 -p 9090:9090 "$IMAGE_ID"`
-
-sleep 3
-
-echo
-echo "Container ID: "
-echo "$CTR_ID"
-
-echo
-echo "Container launching completed. Container listenning adress: "
-docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$CTR_ID"
-
-echo
-echo "To get more informations, try: docker inspect $CTR_ID"
 
 

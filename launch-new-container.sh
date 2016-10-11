@@ -20,9 +20,9 @@ cat djoe-dependencies/turnCredentials.json
 
 # Build final image
 IMAGE_ID="heydjoe"
+CTR_NAME="heydjoe-container"
 
-#EXPOSE 22 80 3000 3005 7070 9001 9090 9091
-CTR_ID=`docker run -d -p 22:22 -p 80:80 -p 3000:3000 -p 7070:7070 -p 9001:9001 -p 9090:9090 "$IMAGE_ID"`
+CTR_ID=`docker run -d -p 22:22 -p 80:80 -p 3000:3000 -p 7070:7070 -p 9001:9001 -p 9090:9090 --name "$CTR_NAME" "$IMAGE_ID"`
 
 sleep 3
 
