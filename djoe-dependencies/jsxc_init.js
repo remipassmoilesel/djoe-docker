@@ -41,7 +41,7 @@ $(function() {
     rest : {
       apiName : "openfire",
       apiBaseUrl : "https://" + httpDomain + "/openfire-rest",
-      apiKey : "ztR2yJWNRu9ffPIw"
+      apiKey : "{{%%OPENFIRE-REST-API-KEY%%}}"
     },
 
     // enable Etherpad support

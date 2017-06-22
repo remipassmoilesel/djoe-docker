@@ -15,6 +15,9 @@ DJOE_XMPP_DOMAIN="heydjoe.xmpp"
 # HTTP domain, where whole installation can be reached
 DJOE_HTTP_DOMAIN="hey-djoe.fr"
 
+# Openfire REST plugin API key
+OPENFIRE_REST_API_KEY="x796935BpfwOok0O"
+
 # If set to true, verbosity will be increased
 DJOE_DEBUG_MODE=false
 #DJOE_DEBUG_MODE=true
