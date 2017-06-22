@@ -1,6 +1,6 @@
 *.tar.gz
 Dockerfile.bak
-
+*.swp
 .idea/
 djoe-project/
 etherpad-lite/

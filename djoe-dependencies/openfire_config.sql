@@ -1,36 +1,28 @@
-
---
---
--- This file is a database snapshot used to reconfigure Openfire,
--- specially REST API plugin
---
---
---
---
---
---
---
-
 --
 -- PostgreSQL database dump
 --
 
+-- Dumped from database version 9.6.3
+-- Dumped by pg_dump version 9.6.3
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET client_encoding = 'SQL_ASCII';
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -43,7 +35,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: ofbookmark; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofbookmark; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofbookmark (
@@ -55,10 +47,10 @@ CREATE TABLE ofbookmark (
 );
 
 
-ALTER TABLE public.ofbookmark OWNER TO postgres;
+ALTER TABLE ofbookmark OWNER TO postgres;
 
 --
--- Name: ofbookmarkperm; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofbookmarkperm; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofbookmarkperm (
@@ -68,10 +60,10 @@ CREATE TABLE ofbookmarkperm (
 );
 
 
-ALTER TABLE public.ofbookmarkperm OWNER TO postgres;
+ALTER TABLE ofbookmarkperm OWNER TO postgres;
 
 --
--- Name: ofbookmarkprop; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofbookmarkprop; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofbookmarkprop (
@@ -81,10 +73,10 @@ CREATE TABLE ofbookmarkprop (
 );
 
 
-ALTER TABLE public.ofbookmarkprop OWNER TO postgres;
+ALTER TABLE ofbookmarkprop OWNER TO postgres;
 
 --
--- Name: ofextcomponentconf; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofextcomponentconf; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofextcomponentconf (
@@ -95,10 +87,10 @@ CREATE TABLE ofextcomponentconf (
 );
 
 
-ALTER TABLE public.ofextcomponentconf OWNER TO postgres;
+ALTER TABLE ofextcomponentconf OWNER TO postgres;
 
 --
--- Name: ofgroup; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofgroup; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofgroup (
@@ -107,10 +99,10 @@ CREATE TABLE ofgroup (
 );
 
 
-ALTER TABLE public.ofgroup OWNER TO postgres;
+ALTER TABLE ofgroup OWNER TO postgres;
 
 --
--- Name: ofgroupprop; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofgroupprop; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofgroupprop (
@@ -120,10 +112,10 @@ CREATE TABLE ofgroupprop (
 );
 
 
-ALTER TABLE public.ofgroupprop OWNER TO postgres;
+ALTER TABLE ofgroupprop OWNER TO postgres;
 
 --
--- Name: ofgroupuser; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofgroupuser; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofgroupuser (
@@ -133,10 +125,10 @@ CREATE TABLE ofgroupuser (
 );
 
 
-ALTER TABLE public.ofgroupuser OWNER TO postgres;
+ALTER TABLE ofgroupuser OWNER TO postgres;
 
 --
--- Name: ofid; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofid; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofid (
@@ -145,10 +137,10 @@ CREATE TABLE ofid (
 );
 
 
-ALTER TABLE public.ofid OWNER TO postgres;
+ALTER TABLE ofid OWNER TO postgres;
 
 --
--- Name: ofmucaffiliation; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofmucaffiliation; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofmucaffiliation (
@@ -158,26 +150,28 @@ CREATE TABLE ofmucaffiliation (
 );
 
 
-ALTER TABLE public.ofmucaffiliation OWNER TO postgres;
+ALTER TABLE ofmucaffiliation OWNER TO postgres;
 
 --
--- Name: ofmucconversationlog; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofmucconversationlog; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofmucconversationlog (
     roomid integer NOT NULL,
+    messageid integer NOT NULL,
     sender character varying(1024) NOT NULL,
     nickname character varying(255),
     logtime character(15) NOT NULL,
     subject character varying(255),
-    body text
+    body text,
+    stanza text
 );
 
 
-ALTER TABLE public.ofmucconversationlog OWNER TO postgres;
+ALTER TABLE ofmucconversationlog OWNER TO postgres;
 
 --
--- Name: ofmucmember; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofmucmember; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofmucmember (
@@ -192,10 +186,10 @@ CREATE TABLE ofmucmember (
 );
 
 
-ALTER TABLE public.ofmucmember OWNER TO postgres;
+ALTER TABLE ofmucmember OWNER TO postgres;
 
 --
--- Name: ofmucroom; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofmucroom; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofmucroom (
@@ -221,14 +215,15 @@ CREATE TABLE ofmucroom (
     rolestobroadcast integer NOT NULL,
     usereservednick integer NOT NULL,
     canchangenick integer NOT NULL,
-    canregister integer NOT NULL
+    canregister integer NOT NULL,
+    allowpm integer
 );
 
 
-ALTER TABLE public.ofmucroom OWNER TO postgres;
+ALTER TABLE ofmucroom OWNER TO postgres;
 
 --
--- Name: ofmucroomprop; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofmucroomprop; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofmucroomprop (
@@ -238,10 +233,10 @@ CREATE TABLE ofmucroomprop (
 );
 
 
-ALTER TABLE public.ofmucroomprop OWNER TO postgres;
+ALTER TABLE ofmucroomprop OWNER TO postgres;
 
 --
--- Name: ofmucservice; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofmucservice; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofmucservice (
@@ -252,10 +247,10 @@ CREATE TABLE ofmucservice (
 );
 
 
-ALTER TABLE public.ofmucservice OWNER TO postgres;
+ALTER TABLE ofmucservice OWNER TO postgres;
 
 --
--- Name: ofmucserviceprop; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofmucserviceprop; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofmucserviceprop (
@@ -265,10 +260,10 @@ CREATE TABLE ofmucserviceprop (
 );
 
 
-ALTER TABLE public.ofmucserviceprop OWNER TO postgres;
+ALTER TABLE ofmucserviceprop OWNER TO postgres;
 
 --
--- Name: ofoffline; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofoffline; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofoffline (
@@ -280,10 +275,10 @@ CREATE TABLE ofoffline (
 );
 
 
-ALTER TABLE public.ofoffline OWNER TO postgres;
+ALTER TABLE ofoffline OWNER TO postgres;
 
 --
--- Name: ofpresence; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofpresence; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofpresence (
@@ -293,10 +288,10 @@ CREATE TABLE ofpresence (
 );
 
 
-ALTER TABLE public.ofpresence OWNER TO postgres;
+ALTER TABLE ofpresence OWNER TO postgres;
 
 --
--- Name: ofprivacylist; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofprivacylist; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofprivacylist (
@@ -307,10 +302,10 @@ CREATE TABLE ofprivacylist (
 );
 
 
-ALTER TABLE public.ofprivacylist OWNER TO postgres;
+ALTER TABLE ofprivacylist OWNER TO postgres;
 
 --
--- Name: ofprivate; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofprivate; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofprivate (
@@ -321,10 +316,10 @@ CREATE TABLE ofprivate (
 );
 
 
-ALTER TABLE public.ofprivate OWNER TO postgres;
+ALTER TABLE ofprivate OWNER TO postgres;
 
 --
--- Name: ofproperty; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofproperty; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofproperty (
@@ -333,10 +328,10 @@ CREATE TABLE ofproperty (
 );
 
 
-ALTER TABLE public.ofproperty OWNER TO postgres;
+ALTER TABLE ofproperty OWNER TO postgres;
 
 --
--- Name: ofpubsubaffiliation; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofpubsubaffiliation; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofpubsubaffiliation (
@@ -347,10 +342,10 @@ CREATE TABLE ofpubsubaffiliation (
 );
 
 
-ALTER TABLE public.ofpubsubaffiliation OWNER TO postgres;
+ALTER TABLE ofpubsubaffiliation OWNER TO postgres;
 
 --
--- Name: ofpubsubdefaultconf; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofpubsubdefaultconf; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofpubsubdefaultconf (
@@ -375,10 +370,10 @@ CREATE TABLE ofpubsubdefaultconf (
 );
 
 
-ALTER TABLE public.ofpubsubdefaultconf OWNER TO postgres;
+ALTER TABLE ofpubsubdefaultconf OWNER TO postgres;
 
 --
--- Name: ofpubsubitem; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofpubsubitem; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofpubsubitem (
@@ -391,10 +386,10 @@ CREATE TABLE ofpubsubitem (
 );
 
 
-ALTER TABLE public.ofpubsubitem OWNER TO postgres;
+ALTER TABLE ofpubsubitem OWNER TO postgres;
 
 --
--- Name: ofpubsubnode; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofpubsubnode; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofpubsubnode (
@@ -430,10 +425,10 @@ CREATE TABLE ofpubsubnode (
 );
 
 
-ALTER TABLE public.ofpubsubnode OWNER TO postgres;
+ALTER TABLE ofpubsubnode OWNER TO postgres;
 
 --
--- Name: ofpubsubnodegroups; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofpubsubnodegroups; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofpubsubnodegroups (
@@ -443,10 +438,10 @@ CREATE TABLE ofpubsubnodegroups (
 );
 
 
-ALTER TABLE public.ofpubsubnodegroups OWNER TO postgres;
+ALTER TABLE ofpubsubnodegroups OWNER TO postgres;
 
 --
--- Name: ofpubsubnodejids; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofpubsubnodejids; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofpubsubnodejids (
@@ -457,10 +452,10 @@ CREATE TABLE ofpubsubnodejids (
 );
 
 
-ALTER TABLE public.ofpubsubnodejids OWNER TO postgres;
+ALTER TABLE ofpubsubnodejids OWNER TO postgres;
 
 --
--- Name: ofpubsubsubscription; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofpubsubsubscription; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofpubsubsubscription (
@@ -482,10 +477,10 @@ CREATE TABLE ofpubsubsubscription (
 );
 
 
-ALTER TABLE public.ofpubsubsubscription OWNER TO postgres;
+ALTER TABLE ofpubsubsubscription OWNER TO postgres;
 
 --
--- Name: ofremoteserverconf; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofremoteserverconf; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofremoteserverconf (
@@ -495,10 +490,10 @@ CREATE TABLE ofremoteserverconf (
 );
 
 
-ALTER TABLE public.ofremoteserverconf OWNER TO postgres;
+ALTER TABLE ofremoteserverconf OWNER TO postgres;
 
 --
--- Name: ofroster; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofroster; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofroster (
@@ -512,10 +507,10 @@ CREATE TABLE ofroster (
 );
 
 
-ALTER TABLE public.ofroster OWNER TO postgres;
+ALTER TABLE ofroster OWNER TO postgres;
 
 --
--- Name: ofrostergroups; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofrostergroups; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofrostergroups (
@@ -525,10 +520,10 @@ CREATE TABLE ofrostergroups (
 );
 
 
-ALTER TABLE public.ofrostergroups OWNER TO postgres;
+ALTER TABLE ofrostergroups OWNER TO postgres;
 
 --
--- Name: ofsaslauthorized; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofsaslauthorized; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofsaslauthorized (
@@ -537,10 +532,10 @@ CREATE TABLE ofsaslauthorized (
 );
 
 
-ALTER TABLE public.ofsaslauthorized OWNER TO postgres;
+ALTER TABLE ofsaslauthorized OWNER TO postgres;
 
 --
--- Name: ofsecurityauditlog; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofsecurityauditlog; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofsecurityauditlog (
@@ -553,10 +548,10 @@ CREATE TABLE ofsecurityauditlog (
 );
 
 
-ALTER TABLE public.ofsecurityauditlog OWNER TO postgres;
+ALTER TABLE ofsecurityauditlog OWNER TO postgres;
 
 --
--- Name: ofuser; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofuser; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofuser (
@@ -574,10 +569,10 @@ CREATE TABLE ofuser (
 );
 
 
-ALTER TABLE public.ofuser OWNER TO postgres;
+ALTER TABLE ofuser OWNER TO postgres;
 
 --
--- Name: ofuserflag; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofuserflag; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofuserflag (
@@ -588,10 +583,10 @@ CREATE TABLE ofuserflag (
 );
 
 
-ALTER TABLE public.ofuserflag OWNER TO postgres;
+ALTER TABLE ofuserflag OWNER TO postgres;
 
 --
--- Name: ofuserprop; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofuserprop; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofuserprop (
@@ -601,10 +596,10 @@ CREATE TABLE ofuserprop (
 );
 
 
-ALTER TABLE public.ofuserprop OWNER TO postgres;
+ALTER TABLE ofuserprop OWNER TO postgres;
 
 --
--- Name: ofvcard; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofvcard; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofvcard (
@@ -613,10 +608,10 @@ CREATE TABLE ofvcard (
 );
 
 
-ALTER TABLE public.ofvcard OWNER TO postgres;
+ALTER TABLE ofvcard OWNER TO postgres;
 
 --
--- Name: ofversion; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofversion; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE ofversion (
@@ -625,7 +620,7 @@ CREATE TABLE ofversion (
 );
 
 
-ALTER TABLE public.ofversion OWNER TO postgres;
+ALTER TABLE ofversion OWNER TO postgres;
 
 --
 -- Data for Name: ofbookmark; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -688,6 +683,11 @@ COPY ofgroupuser (groupname, username, administrator) FROM stdin;
 --
 
 COPY ofid (idtype, id) FROM stdin;
+18	1
+19	1
+23	1
+26	2
+25	3
 \.
 
 
@@ -703,7 +703,7 @@ COPY ofmucaffiliation (roomid, jid, affiliation) FROM stdin;
 -- Data for Name: ofmucconversationlog; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY ofmucconversationlog (roomid, sender, nickname, logtime, subject, body) FROM stdin;
+COPY ofmucconversationlog (roomid, messageid, sender, nickname, logtime, subject, body, stanza) FROM stdin;
 \.
 
 
@@ -719,7 +719,7 @@ COPY ofmucmember (roomid, jid, nickname, firstname, lastname, url, email, faqent
 -- Data for Name: ofmucroom; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY ofmucroom (serviceid, roomid, creationdate, modificationdate, name, naturalname, description, lockeddate, emptydate, canchangesubject, maxusers, publicroom, moderated, membersonly, caninvite, roompassword, candiscoverjid, logenabled, subject, rolestobroadcast, usereservednick, canchangenick, canregister) FROM stdin;
+COPY ofmucroom (serviceid, roomid, creationdate, modificationdate, name, naturalname, description, lockeddate, emptydate, canchangesubject, maxusers, publicroom, moderated, membersonly, caninvite, roompassword, candiscoverjid, logenabled, subject, rolestobroadcast, usereservednick, canchangenick, canregister, allowpm) FROM stdin;
 \.
 
 
@@ -785,13 +785,16 @@ COPY ofprivate (username, name, namespace, privatedata) FROM stdin;
 --
 
 COPY ofproperty (name, propvalue) FROM stdin;
-passwordKey	2szOuB94Rri7LRc
+passwordKey	6Jw72irE8iFaw9A
+xmpp.socket.ssl.active	true
 provider.admin.className	org.jivesoftware.openfire.admin.DefaultAdminProvider
 xmpp.domain	{{%%XMPP-DOMAIN%%}}
+xmpp.auth.anonymous	false
 provider.auth.className	org.jivesoftware.openfire.auth.DefaultAuthProvider
 provider.lockout.className	org.jivesoftware.openfire.lockout.DefaultLockOutProvider
 provider.group.className	org.jivesoftware.openfire.group.DefaultGroupProvider
 provider.vcard.className	org.jivesoftware.openfire.vcard.DefaultVCardProvider
+xmpp.fqdn	LeSurvivantNaKunOeil
 provider.securityAudit.className	org.jivesoftware.openfire.security.DefaultSecurityAuditProvider
 provider.user.className	org.jivesoftware.openfire.user.DefaultUserProvider
 adminConsole.port	9090
@@ -802,8 +805,8 @@ stream.management.requestFrequency	5
 connectionProvider.className	org.jivesoftware.database.DefaultConnectionProvider
 database.defaultProvider.driver	org.postgresql.Driver
 database.defaultProvider.serverURL	jdbc:postgresql://localhost:5432/openfire
-database.defaultProvider.username	a05cfafbefea3e6d92a2362b2c418b7b688f9bdc797ddd5487a11f38c498ac50
-database.defaultProvider.password	0c3254052ad2285fdf14edd9451bb14ba62fba6a56e258acf2e6e5dc8a5a0697
+database.defaultProvider.username	0c4fe5785d29f55839f78fb9a76ff58a8d098c2ea97557b7b008297a1fc677d7
+database.defaultProvider.password	84f87c3753c0642778cb1ae9bf1d023351d8a28ab9bd73302914581a44ca46b6
 database.defaultProvider.testSQL	select 1
 database.defaultProvider.testBeforeUse	false
 database.defaultProvider.testAfterUse	false
@@ -813,53 +816,27 @@ database.defaultProvider.connectionTimeout	1.0
 setup	true
 sasl.scram-sha-1.iteration-count	4096
 xmpp.session.conflict-limit	0
-xmpp.socket.ssl.keystore	/opt/openfire/resources/security/keystore
-xmpp.socket.ssl.keypass	O3ZgYmC9
-xmpp.socket.ssl.truststore	/opt/openfire/resources/security/truststore
-xmpp.socket.ssl.trustpass	changeit
-xmpp.socket.ssl.client.keystore	/opt/openfire/resources/security/keystore
-xmpp.socket.ssl.client.keypass	O3ZgYmC9
-xmpp.socket.ssl.client.truststore	/opt/openfire/resources/security/truststore
-xmpp.socket.ssl.client.trustpass	changeit
-xmpp.bosh.ssl.client.keystore	/opt/openfire/resources/security/keystore
-xmpp.bosh.ssl.client.keypass	O3ZgYmC9
-xmpp.bosh.ssl.client.truststore	/opt/openfire/resources/security/truststore
-xmpp.bosh.ssl.client.trustpass	changeit
-xmpp.component.keystore	/opt/openfire/resources/security/keystore
-xmpp.component.keypass	O3ZgYmC9
-xmpp.component.truststore	/opt/openfire/resources/security/truststore
-xmpp.component.trustpass	changeit
-xmpp.multiplex.keystore	/opt/openfire/resources/security/keystore
-xmpp.multiplex.keypass	O3ZgYmC9
-xmpp.multiplex.truststore	/opt/openfire/resources/security/truststore
-xmpp.multiplex.trustpass	changeit
-plugin.restapi.secret	ztR2yJWNRu9ffPIw
-httpbind.CORS.enabled	true
-httpbind.CORS.domains	*
-xmpp.socket.plain.active	false
-xmpp.client.idle.ping	true
-xmpp.client.idle	120000
-xmpp.server.socket.active	false
-xmpp.component.socket.active	false
-xmpp.component.ssl.active	false
-xmpp.multiplex.socket.active	false
-httpbind.forwarded.enabled	true
+update.lastCheck	1498123090861
+plugin.restapi.secret	x796935BpfwOok0O
 register.inband	false
 register.password	false
-plugin.restapi.enabled	true
-plugin.restapi.httpAuth	secret
-plugin.restapi.customAuthFilter	null
-update.lastCheck	1473166952019
-xmpp.httpbind.scriptSyntax.enabled	true
-httpbind.enabled	true
+sasl.mechs.00001	EXTERNAL
+sasl.mechs.00002	PLAIN
+sasl.mechs.00003	SCRAM-SHA-1
+sasl.mechs.00004	ANONYMOUS
+sasl.mechs.00005	DIGEST-MD5
+sasl.mechs.00006	CRAM-MD5
+sasl.mechs.00007	GSSAPI
+sasl.mechs.00008	JIVE-SHAREDSECRET
+plugin.restapi.enabled	false
+plugin.restapi.httpAuth	basic
+plugin.restapi.allowedIPs	
 mediaproxy.idleTimeout	60000
 mediaproxy.lifetime	9000
 mediaproxy.enabled	true
 mediaproxy.portMin	10000
 mediaproxy.portMax	20000
 mediaproxy.echoPort	10020
-xmpp.socket.ssl.active	true
-xmpp.auth.anonymous	true
 \.
 
 
@@ -868,6 +845,7 @@ xmpp.auth.anonymous	true
 --
 
 COPY ofpubsubaffiliation (serviceid, nodeid, jid, affiliation) FROM stdin;
+pubsub		lesurvivantnakunoeil	owner
 \.
 
 
@@ -876,6 +854,8 @@ COPY ofpubsubaffiliation (serviceid, nodeid, jid, affiliation) FROM stdin;
 --
 
 COPY ofpubsubdefaultconf (serviceid, leaf, deliverpayloads, maxpayloadsize, persistitems, maxitems, notifyconfigchanges, notifydelete, notifyretract, presencebased, senditemsubscribe, publishermodel, subscriptionenabled, accessmodel, language, replypolicy, associationpolicy, maxleafnodes) FROM stdin;
+pubsub	1	1	5120	0	1	1	1	1	0	1	publishers	1	open	English	\N	all	-1
+pubsub	0	0	0	0	0	1	1	1	0	0	publishers	1	open	English	\N	all	-1
 \.
 
 
@@ -892,6 +872,7 @@ COPY ofpubsubitem (serviceid, nodeid, id, jid, creationdate, payload) FROM stdin
 --
 
 COPY ofpubsubnode (serviceid, nodeid, leaf, creationdate, modificationdate, parent, deliverpayloads, maxpayloadsize, persistitems, maxitems, notifyconfigchanges, notifydelete, notifyretract, presencebased, senditemsubscribe, publishermodel, subscriptionenabled, configsubscription, accessmodel, payloadtype, bodyxslt, dataformxslt, creator, description, language, name, replypolicy, associationpolicy, maxleafnodes) FROM stdin;
+pubsub		0	001498123055544	001498123055544	\N	0	0	0	0	1	1	1	0	0	publishers	1	0	open				lesurvivantnakunoeil		English		\N	all	-1
 \.
 
 
@@ -956,6 +937,8 @@ COPY ofsaslauthorized (username, principal) FROM stdin;
 --
 
 COPY ofsecurityauditlog (msgid, username, entrystamp, summary, node, details) FROM stdin;
+1	admin	1498123128940	edited registration settings	lesurvivantnakunoeil	inband enabled = false\ncan change password = false\nanon login = false\nallowed ips = \nblocked ips = \nSASL mechanisms enabled = [EXTERNAL, PLAIN, SCRAM-SHA-1, ANONYMOUS, DIGEST-MD5, CRAM-MD5, GSSAPI, JIVE-SHAREDSECRET]
+2	admin	1498123147432	edited media proxy settings	lesurvivantnakunoeil	minport = 10000\nmaxport = 20000\nechoport = 10020\nenabled = true\nlifetime = 9000\nkeepalivedelay = 60
 \.
 
 
@@ -964,6 +947,7 @@ COPY ofsecurityauditlog (msgid, username, entrystamp, summary, node, details) FR
 --
 
 COPY ofuser (username, storedkey, serverkey, salt, iterations, plainpassword, encryptedpassword, name, email, creationdate, modificationdate) FROM stdin;
+admin	V2LxCevkavDaweQLncgdDWAgHLE=	Kh+nPmXjciJnHwb5TKiKKJVlqZ8=	lUPCfKGnyT0UqzpTcf2PXmkS0bio2CVG	4096	\N	70a2f06908d1b11ba6968280b0644fa8ad7adaaabaebdb53	Administrator	admin@example.com	001498123050407	0              
 \.
 
 
@@ -996,13 +980,13 @@ COPY ofvcard (username, vcard) FROM stdin;
 --
 
 COPY ofversion (name, version) FROM stdin;
-openfire	22
+openfire	25
 clientcontrol	0
 \.
 
 
 --
--- Name: ofbookmark_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofbookmark ofbookmark_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofbookmark
@@ -1010,7 +994,7 @@ ALTER TABLE ONLY ofbookmark
 
 
 --
--- Name: ofbookmarkperm_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofbookmarkperm ofbookmarkperm_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofbookmarkperm
@@ -1018,7 +1002,7 @@ ALTER TABLE ONLY ofbookmarkperm
 
 
 --
--- Name: ofbookmarkprop_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofbookmarkprop ofbookmarkprop_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofbookmarkprop
@@ -1026,7 +1010,7 @@ ALTER TABLE ONLY ofbookmarkprop
 
 
 --
--- Name: ofextcomponentconf_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofextcomponentconf ofextcomponentconf_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofextcomponentconf
@@ -1034,7 +1018,7 @@ ALTER TABLE ONLY ofextcomponentconf
 
 
 --
--- Name: ofgroup_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofgroup ofgroup_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofgroup
@@ -1042,7 +1026,7 @@ ALTER TABLE ONLY ofgroup
 
 
 --
--- Name: ofgroupprop_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofgroupprop ofgroupprop_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofgroupprop
@@ -1050,7 +1034,7 @@ ALTER TABLE ONLY ofgroupprop
 
 
 --
--- Name: ofgroupuser_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofgroupuser ofgroupuser_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofgroupuser
@@ -1058,7 +1042,7 @@ ALTER TABLE ONLY ofgroupuser
 
 
 --
--- Name: ofid_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofid ofid_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofid
@@ -1066,7 +1050,7 @@ ALTER TABLE ONLY ofid
 
 
 --
--- Name: ofmucaffiliation_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofmucaffiliation ofmucaffiliation_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofmucaffiliation
@@ -1074,7 +1058,7 @@ ALTER TABLE ONLY ofmucaffiliation
 
 
 --
--- Name: ofmucmember_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofmucmember ofmucmember_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofmucmember
@@ -1082,7 +1066,7 @@ ALTER TABLE ONLY ofmucmember
 
 
 --
--- Name: ofmucroom_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofmucroom ofmucroom_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofmucroom
@@ -1090,7 +1074,7 @@ ALTER TABLE ONLY ofmucroom
 
 
 --
--- Name: ofmucroomprop_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofmucroomprop ofmucroomprop_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofmucroomprop
@@ -1098,7 +1082,7 @@ ALTER TABLE ONLY ofmucroomprop
 
 
 --
--- Name: ofmucservice_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofmucservice ofmucservice_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofmucservice
@@ -1106,7 +1090,7 @@ ALTER TABLE ONLY ofmucservice
 
 
 --
--- Name: ofmucserviceprop_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofmucserviceprop ofmucserviceprop_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofmucserviceprop
@@ -1114,7 +1098,7 @@ ALTER TABLE ONLY ofmucserviceprop
 
 
 --
--- Name: ofoffline_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofoffline ofoffline_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofoffline
@@ -1122,7 +1106,7 @@ ALTER TABLE ONLY ofoffline
 
 
 --
--- Name: ofpresence_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofpresence ofpresence_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofpresence
@@ -1130,7 +1114,7 @@ ALTER TABLE ONLY ofpresence
 
 
 --
--- Name: ofprivacylist_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofprivacylist ofprivacylist_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofprivacylist
@@ -1138,7 +1122,7 @@ ALTER TABLE ONLY ofprivacylist
 
 
 --
--- Name: ofprivate_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofprivate ofprivate_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofprivate
@@ -1146,7 +1130,7 @@ ALTER TABLE ONLY ofprivate
 
 
 --
--- Name: ofproperty_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofproperty ofproperty_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofproperty
@@ -1154,7 +1138,7 @@ ALTER TABLE ONLY ofproperty
 
 
 --
--- Name: ofpubsubaffiliation_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofpubsubaffiliation ofpubsubaffiliation_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofpubsubaffiliation
@@ -1162,7 +1146,7 @@ ALTER TABLE ONLY ofpubsubaffiliation
 
 
 --
--- Name: ofpubsubdefaultconf_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofpubsubdefaultconf ofpubsubdefaultconf_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofpubsubdefaultconf
@@ -1170,7 +1154,7 @@ ALTER TABLE ONLY ofpubsubdefaultconf
 
 
 --
--- Name: ofpubsubitem_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofpubsubitem ofpubsubitem_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofpubsubitem
@@ -1178,7 +1162,7 @@ ALTER TABLE ONLY ofpubsubitem
 
 
 --
--- Name: ofpubsubnode_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofpubsubnode ofpubsubnode_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofpubsubnode
@@ -1186,7 +1170,7 @@ ALTER TABLE ONLY ofpubsubnode
 
 
 --
--- Name: ofpubsubnodejids_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofpubsubnodejids ofpubsubnodejids_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofpubsubnodejids
@@ -1194,7 +1178,7 @@ ALTER TABLE ONLY ofpubsubnodejids
 
 
 --
--- Name: ofpubsubsubscription_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofpubsubsubscription ofpubsubsubscription_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofpubsubsubscription
@@ -1202,7 +1186,7 @@ ALTER TABLE ONLY ofpubsubsubscription
 
 
 --
--- Name: ofremoteserverconf_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofremoteserverconf ofremoteserverconf_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofremoteserverconf
@@ -1210,7 +1194,7 @@ ALTER TABLE ONLY ofremoteserverconf
 
 
 --
--- Name: ofroster_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofroster ofroster_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofroster
@@ -1218,7 +1202,7 @@ ALTER TABLE ONLY ofroster
 
 
 --
--- Name: ofrostergroups_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofrostergroups ofrostergroups_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofrostergroups
@@ -1226,7 +1210,7 @@ ALTER TABLE ONLY ofrostergroups
 
 
 --
--- Name: ofsaslauthorized_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofsaslauthorized ofsaslauthorized_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofsaslauthorized
@@ -1234,7 +1218,7 @@ ALTER TABLE ONLY ofsaslauthorized
 
 
 --
--- Name: ofsecurityauditlog_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofsecurityauditlog ofsecurityauditlog_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofsecurityauditlog
@@ -1242,7 +1226,7 @@ ALTER TABLE ONLY ofsecurityauditlog
 
 
 --
--- Name: ofuser_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofuser ofuser_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofuser
@@ -1250,7 +1234,7 @@ ALTER TABLE ONLY ofuser
 
 
 --
--- Name: ofuserflag_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofuserflag ofuserflag_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofuserflag
@@ -1258,7 +1242,7 @@ ALTER TABLE ONLY ofuserflag
 
 
 --
--- Name: ofuserprop_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofuserprop ofuserprop_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofuserprop
@@ -1266,7 +1250,7 @@ ALTER TABLE ONLY ofuserprop
 
 
 --
--- Name: ofvcard_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofvcard ofvcard_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofvcard
@@ -1274,7 +1258,7 @@ ALTER TABLE ONLY ofvcard
 
 
 --
--- Name: ofversion_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofversion ofversion_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofversion
@@ -1282,119 +1266,116 @@ ALTER TABLE ONLY ofversion
 
 
 --
--- Name: ofmucconversationlog_time_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofmucconversationlog_msg_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX ofmucconversationlog_msg_id ON ofmucconversationlog USING btree (messageid);
+
+
+--
+-- Name: ofmucconversationlog_time_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX ofmucconversationlog_time_idx ON ofmucconversationlog USING btree (logtime);
 
 
 --
--- Name: ofmucroom_roomid_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofmucroom_roomid_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX ofmucroom_roomid_idx ON ofmucroom USING btree (roomid);
 
 
 --
--- Name: ofmucroom_serviceid_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofmucroom_serviceid_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX ofmucroom_serviceid_idx ON ofmucroom USING btree (serviceid);
 
 
 --
--- Name: ofmucservice_serviceid_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofmucservice_serviceid_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX ofmucservice_serviceid_idx ON ofmucservice USING btree (serviceid);
 
 
 --
--- Name: ofprivacylist_default_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofprivacylist_default_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX ofprivacylist_default_idx ON ofprivacylist USING btree (username, isdefault);
 
 
 --
--- Name: ofpubsubnodegroups_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofpubsubnodegroups_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX ofpubsubnodegroups_idx ON ofpubsubnodegroups USING btree (serviceid, nodeid);
 
 
 --
--- Name: ofroster_jid_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofroster_jid_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX ofroster_jid_idx ON ofroster USING btree (jid);
 
 
 --
--- Name: ofroster_username_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofroster_username_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX ofroster_username_idx ON ofroster USING btree (username);
 
 
 --
--- Name: ofrostergroups_rosterid_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofrostergroups_rosterid_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX ofrostergroups_rosterid_idx ON ofrostergroups USING btree (rosterid);
 
 
 --
--- Name: ofsecurityauditlog_tstamp_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofsecurityauditlog_tstamp_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX ofsecurityauditlog_tstamp_idx ON ofsecurityauditlog USING btree (entrystamp);
 
 
 --
--- Name: ofsecurityauditlog_uname_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofsecurityauditlog_uname_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX ofsecurityauditlog_uname_idx ON ofsecurityauditlog USING btree (username);
 
 
 --
--- Name: ofuser_cdate_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofuser_cdate_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX ofuser_cdate_idx ON ofuser USING btree (creationdate);
 
 
 --
--- Name: ofuserflag_etime_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofuserflag_etime_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX ofuserflag_etime_idx ON ofuserflag USING btree (endtime);
 
 
 --
--- Name: ofuserflag_stime_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace:
+-- Name: ofuserflag_stime_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX ofuserflag_stime_idx ON ofuserflag USING btree (starttime);
 
 
 --
--- Name: ofrostergroups_rosterid_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: ofrostergroups ofrostergroups_rosterid_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY ofrostergroups
     ADD CONSTRAINT ofrostergroups_rosterid_fk FOREIGN KEY (rosterid) REFERENCES ofroster(rosterid) DEFERRABLE INITIALLY DEFERRED;
-
-
---
--- Name: public; Type: ACL; Schema: -; Owner: postgres
---
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO postgres;
-GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
