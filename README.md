@@ -104,3 +104,8 @@ TURN server credentials can be inserted in `djoe-dependencies/turnCrednetials.js
 
 Djoe is an internship project writted in few months, currently in alpha version. In its current state it is usable but it 
 requires a bit of work to be improved and fully operational. 
+
+## TODO
+
+    - Change XMPP server
+    - Add more tests
