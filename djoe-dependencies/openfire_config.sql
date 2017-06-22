@@ -817,7 +817,7 @@ setup	true
 sasl.scram-sha-1.iteration-count	4096
 xmpp.session.conflict-limit	0
 update.lastCheck	1498123090861
-plugin.restapi.secret	x796935BpfwOok0O
+plugin.restapi.secret	{{%%OPENFIRE-REST-API-KEY%%}}
 register.inband	false
 register.password	false
 sasl.mechs.00001	EXTERNAL
@@ -828,8 +828,8 @@ sasl.mechs.00005	DIGEST-MD5
 sasl.mechs.00006	CRAM-MD5
 sasl.mechs.00007	GSSAPI
 sasl.mechs.00008	JIVE-SHAREDSECRET
-plugin.restapi.enabled	false
-plugin.restapi.httpAuth	basic
+plugin.restapi.enabled	true
+plugin.restapi.httpAuth	secret
 plugin.restapi.allowedIPs	
 mediaproxy.idleTimeout	60000
 mediaproxy.lifetime	9000

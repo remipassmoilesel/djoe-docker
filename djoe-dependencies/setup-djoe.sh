@@ -24,7 +24,7 @@ bower install --allow-root
 # modify TURN credentials
 cp /opt/djoe-dependencies/turnCredentials.json /opt/djoe-project/var/www/djoe/
 
-# modify XMPP client init  and {{%%XMPP-DOMAIN%%}}
+# modify XMPP client init 
 sed -i "s/{{%%HTTP-DOMAIN%%}}/$DJOE_HTTP_DOMAIN/g" /opt/djoe-dependencies/jsxc_init.js
 sed -i "s/{{%%XMPP-DOMAIN%%}}/$DJOE_XMPP_DOMAIN/g" /opt/djoe-dependencies/jsxc_init.js
 sed -i "s/{{%%OPENFIRE-REST-API-KEY%%}}/$OPENFIRE_REST_API_KEY/g" /opt/djoe-dependencies/jsxc_init.js
